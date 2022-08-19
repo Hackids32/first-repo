@@ -10,7 +10,7 @@ include "detect.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JSC System | Login</title>
+    <title>HRIS Lite | Login</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -26,7 +26,7 @@ include "detect.php";
         <div class="row">
 
             <div class="col-md-6">
-                <h2 class="font-bold">Welcome to JSC System</h2>
+                <h2 class="font-bold">Welcome to HRIS Lite</h2>
 
                 <p>
                     Silahkan masuk kedalam akun anda
@@ -74,13 +74,13 @@ include "detect.php";
                 </div>
             </div>
         </div>
-        <hr/>
+        <hr />
         <div class="row">
             <div class="col-md-6">
-                Copyright Jakarta Skin Center | Powered by Hackids & Jun's
+                Copyright Nusa Toyotetsu | Powered by Hackids
             </div>
             <div class="col-md-6 text-right">
-               <small>© 2014-<?php echo date('Y'); ?></small>
+                <small>© 2014-<?php echo date('Y'); ?></small>
             </div>
         </div>
     </div>
