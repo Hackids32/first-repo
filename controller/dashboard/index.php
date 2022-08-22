@@ -1,32 +1,41 @@
-<div class="wrapper wrapper-content">
+<?php
+if (empty($_SESSION['username']) and empty($_SESSION['passuser'])) {
+    echo "<script>window.location='index.php';</script>";
+} else {
+    //ot propose
+    $ot_propose = $koneksi->query("SELECT id_osc FROM overtime WHERE create_by = '$_SESSION[username]' AND stat_post = 'Propose'");
+    $ot_propose_c = mysqli_num_rows($ot_propose);
+    //ot pending
+    $ot_pending = $koneksi->query("SELECT id_osc FROM overtime WHERE create_by = '$_SESSION[username]' AND stat_post = 'Pending'");
+    $ot_pending_c = mysqli_num_rows($ot_pending);
+    //ot posted
+    $ot_posted = $koneksi->query("SELECT id_osc FROM overtime WHERE create_by = '$_SESSION[username]' AND stat_post = 'Posted'");
+    $ot_posted_c = mysqli_num_rows($ot_posted);
+
+    //lp propose
+    $lp_propose = $koneksi->query("SELECT id_apps FROM leave_application WHERE created = '$_SESSION[username]' AND stat_leave = 'Propose'");
+    $lp_propose_c = mysqli_num_rows($lp_propose);
+    //lp pending
+    $lp_pending = $koneksi->query("SELECT id_apps FROM leave_application WHERE created = '$_SESSION[username]' AND stat_leave = 'Pending'");
+    $lp_pending_c = mysqli_num_rows($lp_pending);
+    //lp posted
+    $lp_posted = $koneksi->query("SELECT id_apps FROM leave_application WHERE created = '$_SESSION[username]' AND stat_leave = 'Posted'");
+    $lp_posted_c = mysqli_num_rows($lp_posted);
+?>
+    <div class="wrapper wrapper-content">
         <div class="row">
-            <div class="col-lg-2">
+
+            <div class="col-lg-4">
                 <div class="ibox ">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <span class="label label-success float-right">Monthly</span>
+                            <span class="label label-danger float-right">Propose</span>
                         </div>
-                        <h5>Views</h5>
+                        <h5>Overtime</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">386,200</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                        <small>Total views</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <div class="ibox-tools">
-                            <span class="label label-info float-right">Annual</span>
-                        </div>
-                        <h5>Orders</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">80,800</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
+                        <h1 class="no-margins"><?php echo $ot_propose_c; ?></h1>
+                        <small>OT Dibuat</small>
                     </div>
                 </div>
             </div>
@@ -35,164 +44,82 @@
                 <div class="ibox ">
                     <div class="ibox-title">
                         <div class="ibox-tools">
-                            <span class="label label-primary float-right">Today</span>
+                            <span class="label label-info float-right">Pending</span>
                         </div>
-                        <h5>visits</h5>
+                        <h5>Overtime</h5>
                     </div>
                     <div class="ibox-content">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h1 class="no-margins">406,42</h1>
-                                <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i> <small>Rapid pace</small></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h1 class="no-margins">206,12</h1>
-                                <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow pace</small></div>
-                            </div>
-                        </div>
-
-
+                        <h1 class="no-margins"><?php echo $ot_pending_c; ?></h1>
+                        <small>Approve Pimpinan</small>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Monthly income</h5>
                         <div class="ibox-tools">
-                            <span class="label label-primary">Updated 12.2015</span>
+                            <span class="label label-success float-right">Posted</span>
                         </div>
-                    </div>
-                    <div class="ibox-content no-padding">
-                        <div class="flot-chart m-t-lg" style="height: 55px;">
-                            <div class="flot-chart-content" id="flot-chart1"></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="ibox ">
-                    <div class="ibox-content">
-                        <div>
-                                        <span class="float-right text-right">
-                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                                            <br/>
-                                            All sales: 162,862
-                                        </span>
-                            <h3 class="font-bold no-margins">
-                                Half-year revenue margin
-                            </h3>
-                            <small>Sales marketing.</small>
-                        </div>
-
-                        <div class="m-t-sm">
-
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div>
-                                        <canvas id="lineChart" height="114"></canvas>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <ul class="stat-list m-t-lg">
-                                        <li>
-                                            <h2 class="no-margins">2,346</h2>
-                                            <small>Total orders in period</small>
-                                            <div class="progress progress-mini">
-                                                <div class="progress-bar" style="width: 48%;"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h2 class="no-margins ">4,422</h2>
-                                            <small>Orders in last month</small>
-                                            <div class="progress progress-mini">
-                                                <div class="progress-bar" style="width: 60%;"></div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="m-t-md">
-                            <small class="float-right">
-                                <i class="fa fa-clock-o"> </i>
-                                Update on 16.07.2015
-                            </small>
-                            <small>
-                                <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-                            </small>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <span class="label label-warning float-right">Data has changed</span>
-                        <h5>User activity</h5>
+                        <h5>Overtime</h5>
                     </div>
                     <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-4">
-                                <small class="stats-label">Pages / Visit</small>
-                                <h4>236 321.80</h4>
-                            </div>
-
-                            <div class="col-4">
-                                <small class="stats-label">% New Visits</small>
-                                <h4>46.11%</h4>
-                            </div>
-                            <div class="col-4">
-                                <small class="stats-label">Last week</small>
-                                <h4>432.021</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-4">
-                                <small class="stats-label">Pages / Visit</small>
-                                <h4>643 321.10</h4>
-                            </div>
-
-                            <div class="col-4">
-                                <small class="stats-label">% New Visits</small>
-                                <h4>92.43%</h4>
-                            </div>
-                            <div class="col-4">
-                                <small class="stats-label">Last week</small>
-                                <h4>564.554</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-4">
-                                <small class="stats-label">Pages / Visit</small>
-                                <h4>436 547.20</h4>
-                            </div>
-
-                            <div class="col-4">
-                                <small class="stats-label">% New Visits</small>
-                                <h4>150.23%</h4>
-                            </div>
-                            <div class="col-4">
-                                <small class="stats-label">Last week</small>
-                                <h4>124.990</h4>
-                            </div>
-                        </div>
+                        <h1 class="no-margins"><?php echo $ot_posted_c; ?></h1>
+                        <small>Approve HRD</small>
                     </div>
                 </div>
             </div>
 
         </div>
 
-</div>
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <div class="ibox-tools">
+                            <span class="label label-danger float-right">Propose</span>
+                        </div>
+                        <h5>Leave Permit</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><?php echo $lp_propose_c; ?></h1>
+                        <small>Permit Dibuat</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <div class="ibox-tools">
+                            <span class="label label-info float-right">Pending</span>
+                        </div>
+                        <h5>Leave Permit</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><?php echo $lp_pending_c; ?></h1>
+                        <small>Approve Pimpinan</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <div class="ibox-tools">
+                            <span class="label label-success float-right">Posted</span>
+                        </div>
+                        <h5>Leave Permit</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><?php echo $lp_posted_c; ?></h1>
+                        <small>Approve HRD</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+<?php } ?>

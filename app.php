@@ -4,7 +4,6 @@ if (empty($_SESSION['username']) and empty($_SESSION['passuser'])) {
     echo "<script>window.location='index.php';</script>";
 } else {
     include "config/koneksi.php";
-    include "config/koneksi2.php";
     include "config/fungsi_kode_otomatis.php";
     include "config/class_paging.php";
     include "config/fungsi_rupiah.php";
@@ -26,7 +25,7 @@ if (empty($_SESSION['username']) and empty($_SESSION['passuser'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>JSC System | v.2</title>
+        <title>HRIS ADMIN | v.3</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -147,7 +146,7 @@ if (empty($_SESSION['username']) and empty($_SESSION['passuser'])) {
                             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                             <ul class="nav navbar-top-links navbar-left">
                                 <li>
-                                    <span class="m-r-sm text-muted welcome-message">Hai <?php echo $_SESSION['username']; ?>, Welcome to JSC System
+                                    <span class="m-r-sm text-muted welcome-message">Hai <?php echo $_SESSION['namauser']; ?>, Welcome to HRIS ADMIN
                                 </li>
 
                                 <li>
@@ -168,7 +167,7 @@ if (empty($_SESSION['username']) and empty($_SESSION['passuser'])) {
                         version <strong>2</strong>
                     </div>
                     <div>
-                        <strong>Copyright</strong> Jakarta Skin Center &copy; 2014-<?php echo date('Y'); ?>
+                        <strong>Copyright</strong> PT. Nusa Toyotetsu &copy; 1996-<?php echo date('Y'); ?>
                     </div>
                 </div>
 
